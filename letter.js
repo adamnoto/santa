@@ -6,16 +6,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * This class represents a letter sent by a user
  */
 class Letter {
-  static UNSENT_LETTERS = [];
-  static MAILER = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'elwyn3@ethereal.email',
-        pass: '4f1gjqgP9QzCQ9bd83'
-    }
-  })
-
   constructor(user, wish) {
     this.user = user;
     this.wish = wish;
