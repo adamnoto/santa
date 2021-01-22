@@ -34,7 +34,6 @@ class Letter {
    * This will send all letters as emails
    */
   static sendAllLetters() {
-    console.log(this.UNSENT_LETTERS);
     while(this.UNSENT_LETTERS.length > 0) {
       const letter = this.UNSENT_LETTERS.pop();
       const { user, wish } = letter;
