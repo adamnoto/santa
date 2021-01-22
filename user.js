@@ -82,6 +82,12 @@ class User {
     })
   }
 
+  getAge() {
+    const today = moment();
+    const age = today.diff(this.birthdate, "years");
+    return age;
+  }
+
   /**
    * Check if the user is registered
    */
@@ -93,9 +99,7 @@ class User {
    * Check if the the user is less than 10 years old
    */
   isNotTooOld() {
-    const today = moment();
-    const age = today.diff(this.birthdate, "years");
-    return age < 10;
+    return this.getAge() < 10;
   }
 
   /**
