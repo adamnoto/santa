@@ -34,8 +34,12 @@ class User {
 
         if (allUsers) {
           const user = allUsers.find(u => u.username == userName);
-          const userId = user.uid;
-          resolve(userId);
+          if (user) {
+            const userId = user.uid;
+            resolve(userId);
+          } else {
+            resolve(null);
+          }
         } else {
           resolve(null);
         }
@@ -53,6 +57,8 @@ class User {
     return new Promise((resolve, reject) => {
       if (!userName) { Promise.resolve(null); }
       this.findUserIdByUsername(userName).then((userId) => {
+        if (!userId) { return resolve(null); }
+
         request(this.PROFILES_ENDPOINT, {json: true}, (err, res, body) => {
           const allProfiles = body;
 
