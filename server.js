@@ -17,12 +17,15 @@ app.use(express.static('public'));
 
 app.get('/', (request, response) => {
   const accepted = request.app.get("accepted");
+  const user = request.app.get("user")
 
   response.render("pages/index", {
     accepted: accepted,
+    user: user,
   });
 
   request.app.set("accepted", undefined);
+  request.app.set("user", undefined);
 });
 
 app.post("/", (request, response) => {
@@ -30,6 +33,7 @@ app.post("/", (request, response) => {
   const wish = request.body.wish;
   User.findByUsername(userName).then((user) => {
     request.app.set("accepted", user.canReceivePresent());
+    request.app.set("user", user);
     response.redirect("/");
   }).catch((reason) => {
     // we may handle this and report error to centralized

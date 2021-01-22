@@ -37,7 +37,11 @@
   <% } %>
 
   <% if (accepted === false) { %>
-    <p>😞 Aww... we could no longer send you a present this year</p>
+    <% if (user) { %>
+        <p>😞 Aww... we could no longer send you a present this year. You've grown so much...</p>
+    <% } else { %>
+        <p>Oh, sorry... we couldn't find your address 🤔 did you enter your data correctly?</p>
+    <% } %>
   <% } %>
 
   <main>
