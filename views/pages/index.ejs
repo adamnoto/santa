@@ -32,12 +32,20 @@
     </h1>
   </header>
 
+  <% if (accepted === true) { %>
+    <p>✨✨✨ Mr. Santa has received your request~~~ ho ho ho 🎅</p>
+  <% } %>
+
+  <% if (accepted === false) { %>
+    <p>😞 Aww... we could no longer send you a present this year</p>
+  <% } %>
+
   <main>
     <p class="bold">Ho ho ho, what you want for christma?</p>
 
     <form method="post">
       who are you?
-      <input name="username" placeholder="charlie.brown" />
+      <input name="username" placeholder="charlie.brown" autofocus />
       what do you want for christmas?
       <textarea name="wish" rows="10" cols="45" maxlength="100" placeholder="Gifts!"></textarea>
       <br/>

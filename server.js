@@ -17,8 +17,12 @@ app.use(express.static('public'));
 
 app.get('/', (request, response) => {
   const accepted = request.app.get("accepted");
-  console.log("ACCEPTED? ", accepted);
-  response.render("pages/index");
+
+  response.render("pages/index", {
+    accepted: accepted,
+  });
+
+  request.app.set("accepted", undefined);
 });
 
 app.post("/", (request, response) => {
