@@ -1,6 +1,9 @@
 const moment = require("moment");
 const request = require('request');
 
+/**
+ * This class represents a User
+ */
 class User {
   static USERS_ENDPOINT = "https://raw.githubusercontent.com/alj-devops/santa-data/master/users.json";
   static PROFILES_ENDPOINT = "https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json"

@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const app = express();
 const bodyParser = require('body-parser');
 const { User } = require("./user");
+const { Letter } = require("./letter");
 
 app.set("view engine", "ejs");
 app.use(bodyParser());
@@ -32,6 +33,10 @@ app.post("/", (request, response) => {
   const userName = request.body.username;
   const wish = request.body.wish;
   User.findByUsername(userName).then((user) => {
+    if (user.canReceivePresent()) {
+      Letter.addNewLetter(user, wish);
+    }
+
     request.app.set("accepted", user.canReceivePresent());
     request.app.set("user", user);
     response.redirect("/");
@@ -48,3 +53,7 @@ const listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
 
+// sent letters every 15 seconds
+setInterval(() => {
+  Letter.sendAllLetters();
+}, 15 * 1000);
