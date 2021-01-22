@@ -11,7 +11,7 @@ class User {
     this.address = address;
 
     if (birthdate) {
-      this.birthdate = moment(birthdate).format("YYYY/DD/MM");
+      this.birthdate = moment(birthdate, "YYYY/DD/MM");
     }
   }
 
@@ -77,14 +77,24 @@ class User {
    * Check if the user is registered
    */
   isRegistered() {
-
+    return !!this.id;
   }
 
   /**
    * Check if the the user is less than 10 years old
    */
-  isNotOld() {
+  isNotTooOld() {
+    const today = moment();
+    const age = today.diff(this.birthdate, "years");
+    console.log("age:", age);
+    return age < 10;
+  }
 
+  /**
+   * Check if the user can receive a present from Mr. Santa
+   */
+  canReceivePresent() {
+    return this.isRegistered() && this.isNotTooOld();
   }
 }
 
