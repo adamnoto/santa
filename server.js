@@ -28,14 +28,12 @@ app.get('/', (request, response) => {
 app.post("/", (request, response) => {
   const userName = request.body.username;
   const wish = request.body.wish;
-  console.log("User", User);
   User.findByUsername(userName).then((user) => {
     request.app.set("accepted", user.canReceivePresent());
     response.redirect("/");
   }).catch((reason) => {
     // we may handle this and report error to centralized
     // error system such as Sentry
-    console.log(reason);
     request.app.set("accepted", false);
     response.redirect("/");
   })

@@ -92,7 +92,6 @@ class User {
   isNotTooOld() {
     const today = moment();
     const age = today.diff(this.birthdate, "years");
-    console.log("age:", age);
     return age < 10;
   }
 
