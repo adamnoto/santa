@@ -1,13 +1,12 @@
 const moment = require("moment");
 const request = require('request');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * This class represents a User
  */
 class User {
-  static USERS_ENDPOINT = "https://raw.githubusercontent.com/alj-devops/santa-data/master/users.json";
-  static PROFILES_ENDPOINT = "https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json"
-
   constructor(id, username, address, birthdate) {
     this.id = id;
     this.username = username;
@@ -109,5 +108,9 @@ class User {
     return this.isRegistered() && this.isNotTooOld();
   }
 }
+
+// can't define static fields in Glitch
+_defineProperty(User, "USERS_ENDPOINT", "https://raw.githubusercontent.com/alj-devops/santa-data/master/users.json");
+_defineProperty(User, "PROFILES_ENDPOINT", "https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json");
 
 module.exports = { User }

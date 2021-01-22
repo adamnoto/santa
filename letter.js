@@ -1,5 +1,7 @@
 const nodemailer = require("nodemailer");
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 /**
  * This class represents a letter sent by a user
  */
@@ -59,6 +61,18 @@ class Letter {
     }
   }
 }
+
+// can't define static fields in Glitch
+_defineProperty(Letter, "UNSENT_LETTERS", []);
+_defineProperty(Letter, "MAILER", nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  auth: {
+    user: 'elwyn3@ethereal.email',
+    pass: '4f1gjqgP9QzCQ9bd83'
+  }
+}));
+
 
 module.exports = { Letter };
 
